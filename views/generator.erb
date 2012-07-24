@@ -1,0 +1,19 @@
+<% if params[:jquery_url] && !params[:jquery_url].empty? %>
+<script src="<%= params[:jquery_url] %>"></script>
+<% end %>
+
+<script> oddsense_account = '<%= params[:oddsense_account] %>' </script>
+<script src="<%= params[:oddsense_js] %>"></script>
+
+<% allowed_events = %w[signup bet deposit] %>
+<% if allowed_events.include?(params[:action_type]) %>
+<script>
+    oddsense.account = '<%= params[:oddsense_account] %>';
+    oddsense.register('<%= params[:action_type] %>', {
+        // Customer information
+        customer_id:'<%= params[:customer_id] %>',
+        name       :'<%= params[:name] %>',
+        amount     :'<%= params[:amount] %>'
+    });
+</script>
+<% end %>

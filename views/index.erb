@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css" media="screen">
+  <link rel="stylesheet" href="css/application.css" type="text/css" media="screen">
+  <link rel="stylesheet" href="css/ir_black.css" type="text/css">
+</head>
+<body>
+<div class="container">
+
+  <form class="well form-horizontal" method="GET">
+    <fieldset>
+      <legend>Test panel</legend>
+
+      <% Fields.each do |name, title| %>
+          <div class="control-group">
+            <label class="control-label" for="<%= name %>"><%= title %></label>
+
+            <div class="controls">
+              <input type="text" class="input-xlarge" name="<%= name %>" value="<%= value_or_default name %>">
+            </div>
+          </div>
+      <% end %>
+
+
+      <div class="control-group">
+        <label class="control-label" for="jquery_url">jQuery</label>
+
+        <div class="controls">
+          <select name="jquery_url">
+            <option value="">None</option>
+            <option value="http://code.jquery.com/jquery-1.7.2.min.js">1.7.2</option>
+            <option value="js/jquery-1.7.min.js" selected="selected">1.7</option>
+            <option value="http://code.jquery.com/jquery-1.6.min.js">1.6</option>
+            <option value="http://code.jquery.com/jquery-1.5.min.js">1.5</option>
+            <option value="http://code.jquery.com/jquery-1.4.min.js">1.4</option>
+            <option value="http://code.jquery.com/jquery-1.3.2.min.js">1.3.2</option>
+          </select>
+        </div>
+      </div>
+    </fieldset>
+
+    <div class="form-actions">
+      <button type="submit" name="action_type" value="new_signup" class="btn btn-primary">New Signup</button>
+      <button type="submit" name="action_type" value="signup" class="btn btn-primary">Signup</button>
+      <button type="submit" name="action_type" value="bet" class="btn btn-primary">Bet</button>
+      <button type="submit" name="action_type" value="deposit" class="btn btn-primary">Deposit</button>
+      <p class="help-block">Run from anywhere but localhost address</p>
+
+    </div>
+  </form>
+
+  <% html = erb(:generator) %>
+  <%= html %>
+
+  <pre><code><%= CGI.escapeHTML(html) %></code>
+    <%= params.inspect %>
+  </pre>
+
+  <script src="js/highlight.pack.js"></script>
+  <script>
+      //      hljs.tabReplace = '    ';
+      hljs.initHighlightingOnLoad();
+  </script>
+</div>
+</body>
+</html>
+
+
