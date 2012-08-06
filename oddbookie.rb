@@ -32,5 +32,6 @@ helpers do
 end
 
 get '/' do
+  response.headers["Access-Control-Allow-Origin"] = "*"
   erb :index
 end
