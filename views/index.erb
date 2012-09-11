@@ -1,13 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css" media="screen">
-  <link rel="stylesheet" href="css/bootstrap-responsive.min.css" type="text/css" media="screen">
-  <link rel="stylesheet" href="css/application.css" type="text/css" media="screen">
-  <link rel="stylesheet" href="css/ir_black.css" type="text/css">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-</head>
-<body>
 <div class="container">
   <div class="row-fluid">
     <div class="span6 form">
@@ -29,28 +19,58 @@
           <div class="control-group">
             <label class="control-label" for="jquery_url">jQuery</label>
 
+            <% JQUERY_LIST = %w{None 1.8.1 1.7.2 1.7 1.6 1.5 1.4 1.3.2} %>
             <div class="controls">
               <select name="jquery_url">
-                <option value="">None</option>
-                <option value="http://code.jquery.com/jquery-1.7.2.min.js">1.7.2</option>
-                <option value="js/jquery-1.7.min.js" selected="selected">1.7</option>
-                <option value="http://code.jquery.com/jquery-1.6.min.js">1.6</option>
-                <option value="http://code.jquery.com/jquery-1.5.min.js">1.5</option>
-                <option value="http://code.jquery.com/jquery-1.4.min.js">1.4</option>
-                <option value="http://code.jquery.com/jquery-1.3.2.min.js">1.3.2</option>
+                <% JQUERY_LIST.each do |title| %>
+                    <% value = title == "None" ? '' : "http://code.jquery.com/jquery-#{title}.min.js" %>
+                    <% opt = params['jquery_url'] == value ? 'selected' : '' %>
+                    <option value="<%= value %>" <%= opt %> ><%= title %></option>
+                <% end %>
               </select>
             </div>
           </div>
+
+          <div class="control-group">
+            <label class="control-label" for="action_type">Action type</label>
+
+            <% ACTION_TYPES = {'Empty' => '', 'Signup' => 'signup', 'Bet' => 'bet', 'Deposit' => 'deposit'} %>
+            <div class="controls">
+              <select name="action_type">
+                <% ACTION_TYPES.each do |title, value| %>
+                    <% opt = params['action_type'] == value ? 'selected' : '' %>
+                    <option value='<%= value %>' <%= opt %> ><%= title %></option>
+                <% end %>
+              </select>
+            </div>
+          </div>
+
+          <div class="control-group">
+            <label class="control-label" for="js_code">Js code</label>
+
+            <div class="controls">
+              <textarea name="js_code" rows="5"><%= params['js_code'] %></textarea>
+            </div>
+          </div>
+
         </fieldset>
 
         <div class="form-actions">
-          <button type="submit" name="action_type" value="new_signup" class="btn btn-primary">New Signup</button>
-          <button type="submit" name="action_type" value="signup" class="btn btn-primary">Signup</button>
-          <button type="submit" name="action_type" value="bet" class="btn btn-primary">Bet</button>
-          <button type="submit" name="action_type" value="deposit" class="btn btn-primary">Deposit</button>
-
+          <button type="submit" value="new_signup" class="btn btn-primary btn-block" type="button">Submit</button>
         </div>
+
       </form>
+
+      <div class="well">
+        <button href='#' id="btn" class='btn'>#btn</button>
+        <button href='#' id="btn-primary" class='btn btn-primary' type="button">#btn-primary</button>
+        <button href='#' id="btn-info" class='btn btn-info'>#btn-info</button>
+        <button href='#' id="btn-success" class='btn btn-success'>#btn-success</button>
+        <button href='#' id="btn-warning" class='btn btn-warning'>#btn-warning</button>
+        <button href='#' id="btn-danger" class='btn btn-danger'>#btn-danger</button>
+        <button href='#' id="btn-inverse" class='btn btn-inverse'>#btn-inverse</button>
+      </div>
+
     </div>
 
     <div class="span6">
@@ -80,7 +100,3 @@
       hljs.initHighlightingOnLoad();
   </script>
 </div>
-</body>
-</html>
-
-

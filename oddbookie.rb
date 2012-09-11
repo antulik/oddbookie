@@ -15,7 +15,7 @@ Fields = {
 
 Defaults = {
     "amount"      => "100",
-    "oddsense_js" => "http://oddsense.dev/oddsense.js"
+    "oddsense_js" => "http://oddsense.dev/assets/oddsense.js"
 }
 
 helpers do

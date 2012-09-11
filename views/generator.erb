@@ -2,21 +2,34 @@
 <script type='text/javascript' src="<%= params[:jquery_url] %>"></script>
 <% end %>
 
-<script> oddsense_account = '<%= params[:oddsense_account] %>' </script>
-<script type='text/javascript' src="<%= params[:oddsense_js] %>"></script>
+<script type="text/javascript">
+    var _osq = _osq || [];
+    _osq.push(['setAccount', '<%= params[:oddsense_account] %>']);
+
+    function _oss(u){
+        setTimeout(function(){
+            var d = document, f = d.getElementsByTagName('script')[0],
+                    s = d.createElement('script');
+            s.type = 'text/javascript'; s.async = true; s.src = u;
+            f.parentNode.insertBefore(s, f);
+        }, 1);
+    }
+    _oss('<%= params[:oddsense_js] %>');
+</script>
 
 <% allowed_events = %w[signup bet deposit] %>
 <% if allowed_events.include?(params[:action_type]) %>
-<script>
-    var oddsense_onload = function(oddsense) {
-        oddsense.account = '<%= params[:oddsense_account] %>';
-        oddsense.register('<%= params[:action_type] %>', {
-            // Customer information
-            customer_id:'<%= params[:customer_id] %>',
-            name       :'<%= params[:name] %>',
-            amount     :'<%= params[:amount] %>',
-            email      :'<%= params[:email] %>'
-        });
-    };
+<script type='text/javascript'>
+    _osq.push(['register', '<%= params[:action_type] %>', {
+        // Customer information
+        customer_id:'<%= params[:customer_id] %>',
+        name       :'<%= params[:name] %>',
+        amount     :'<%= params[:amount] %>',
+        email      :'<%= params[:email] %>'
+    }]);
 </script>
 <% end %>
+
+<script type='text/javascript'>
+<%= params[:js_code] %>
+</script>
