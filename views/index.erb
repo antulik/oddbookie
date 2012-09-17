@@ -1,3 +1,6 @@
+<% html = erb(:generator) %>
+<%= html %>
+
 <div class="container">
   <div class="row-fluid">
     <div class="span6 form">
@@ -46,11 +49,30 @@
           </div>
 
           <div class="control-group">
-            <label class="control-label" for="js_code">Js code</label>
+            <label class="control-label" for="js_code">Auto Js code</label>
 
             <div class="controls">
               <textarea name="js_code" rows="5"><%= params['js_code'] %></textarea>
             </div>
+          </div>
+
+          <div class="control-group">
+            <label class="control-label" for="js_code_manual">Manual Js code</label>
+
+            <div class="controls">
+              <textarea name="js_code_manual" rows="5"><%= params['js_code_manual'] %></textarea>
+              <button href="#" class="btn btn-warning" id="execute_js">Execute js</button>
+            </div>
+
+            <script>
+              $(function() {
+                $('#execute_js').on("click", function(e) {
+                    e.preventDefault();
+                    var fn_text = $('textarea[name=js_code_manual]').first().val();
+                    eval(fn_text);
+                })
+              });
+            </script>
           </div>
 
         </fieldset>
@@ -76,9 +98,6 @@
     <div class="span6">
 
       <div class="well">
-
-        <% html = erb(:generator) %>
-        <%= html %>
 
         <legend>Generated code</legend>
         <pre><code class="html"><%= CGI.escapeHTML(html) %></code></pre>
