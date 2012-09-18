@@ -17,19 +17,6 @@
     _oss('<%= params[:oddsense_js] %>');
 </script>
 
-<% allowed_events = %w[signup bet deposit] %>
-<% if allowed_events.include?(params[:action_type]) %>
-<script type='text/javascript'>
-    _osq.push(['register', '<%= params[:action_type] %>', {
-        // Customer information
-        customer_id:'<%= params[:customer_id] %>',
-        name       :'<%= params[:name] %>',
-        amount     :'<%= params[:amount] %>',
-        email      :'<%= params[:email] %>'
-    }]);
-</script>
-<% end %>
-
 <script type='text/javascript'>
 <%= params[:js_code] %>
 </script>

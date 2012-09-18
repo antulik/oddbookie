@@ -35,20 +35,6 @@
           </div>
 
           <div class="control-group">
-            <label class="control-label" for="action_type">Action type</label>
-
-            <% ACTION_TYPES = {'Empty' => '', 'Signup' => 'signup', 'Bet' => 'bet', 'Deposit' => 'deposit'} %>
-            <div class="controls">
-              <select name="action_type">
-                <% ACTION_TYPES.each do |title, value| %>
-                    <% opt = params['action_type'] == value ? 'selected' : '' %>
-                    <option value='<%= value %>' <%= opt %> ><%= title %></option>
-                <% end %>
-              </select>
-            </div>
-          </div>
-
-          <div class="control-group">
             <label class="control-label" for="js_code">Auto Js code</label>
 
             <div class="controls">
