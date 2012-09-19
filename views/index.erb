@@ -20,14 +20,14 @@
 
 
           <div class="control-group">
-            <label class="control-label" for="jquery_url">jQuery</label>
+            <label class="control-label" for="jquery_version">jQuery</label>
 
             <% JQUERY_LIST = %w{None 1.8.1 1.7.2 1.7 1.6 1.5 1.4 1.3.2} %>
             <div class="controls">
-              <select name="jquery_url">
+              <select name="jquery_version">
                 <% JQUERY_LIST.each do |title| %>
-                    <% value = title == "None" ? '' : "http://code.jquery.com/jquery-#{title}.min.js" %>
-                    <% opt = params['jquery_url'] == value ? 'selected' : '' %>
+                    <% value = title == "None" ? '' : title %>
+                    <% opt = params['jquery_version'] == value ? 'selected' : '' %>
                     <option value="<%= value %>" <%= opt %> ><%= title %></option>
                 <% end %>
               </select>
@@ -47,17 +47,17 @@
 
             <div class="controls">
               <textarea name="js_code_manual" rows="5"><%= params['js_code_manual'] %></textarea>
-              <button href="#" class="btn btn-warning" id="execute_js">Execute js</button>
+              <a onclick="js_code_manual_click(event);" class="btn btn-warning" id="execute_js">Execute js</a>
             </div>
 
             <script>
-              $(function() {
-                $('#execute_js').on("click", function(e) {
-                    e.preventDefault();
-                    var fn_text = $('textarea[name=js_code_manual]').first().val();
-                    eval(fn_text);
-                })
-              });
+                function js_code_manual_click(e){
+                    if (typeof($) != 'undefined'){
+                        e.preventDefault();
+                        var fn_text = $('textarea[name=js_code_manual]:first').val();
+                        eval(fn_text);
+                    }
+                }
             </script>
           </div>
 

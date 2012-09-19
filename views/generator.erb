@@ -1,5 +1,5 @@
-<% if params[:jquery_url] && !params[:jquery_url].empty? %>
-<script type='text/javascript' src="<%= params[:jquery_url] %>"></script>
+<% if params[:jquery_version] && !params[:jquery_version].empty? %>
+<script type='text/javascript' src="//ajax.googleapis.com/ajax/libs/jquery/<%= params[:jquery_version] %>/jquery.min.js"></script>
 <% end %>
 
 <script type="text/javascript">
